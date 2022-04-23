@@ -2,7 +2,7 @@ test_that("Test: load_seasons + get_team_names", {
 
   data <- load_seasons(from = 20, to = 22)
 
-  expect_equal(class(res)[1], "tbl_df")
+  expect_equal(class(data)[1], "tbl_df")
 
   expect_equal(
     data %>%
