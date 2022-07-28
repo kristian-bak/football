@@ -21,19 +21,19 @@ get_modeling_data <- function(data) {
 #'
 get_modeling_data_simple <- function(data) {
 
-  Goals <- c(data$FTHG, data$FTAG)
-  Team <- c(data$HomeTeam, data$AwayTeam)
-  Opponent <- c(data$AwayTeam, data$HomeTeam)
-  Home <- c(rep("1", nrow(data)),
-            rep("0", nrow(data)))
-  Shots <- c(data$HS, data$AS)
-  ShotsOnTarget <- c(data$HST, data$AST)
-  Fouls <- c(data$HF, data$AF)
-  Corners <- c(data$HC, data$AC)
-  YellowCard <- c(data$HY, data$AY)
-  RedCard <- c(data$HR, data$AR)
+  Date <- rep(data$Date, each = 2)
+  Goals <- alternate_vectors(a = data$FTHG, b = data$FTAG)
+  Team <- alternate_vectors(a = data$HomeTeam, b = data$AwayTeam)
+  Opponent <- alternate_vectors(a = data$AwayTeam, b = data$HomeTeam)
+  Home <- rep(c("1", "0"), nrow(data)) %>% as.factor()
+  Shots <- alternate_vectors(a = data$HS, b = data$AS)
+  ShotsOnTarget <- alternate_vectors(a = data$HST, b = data$AST)
+  Fouls <- alternate_vectors(a = data$HF, b = data$AF)
+  Corners <- alternate_vectors(a = data$HC, b = data$AC)
+  YellowCard <- alternate_vectors(a = data$HY, b = data$AY)
+  RedCard <- alternate_vectors(a = data$HR, b = data$AR)
 
-  dplyr::tibble(Goals, Team, Opponent, Home, Shots, ShotsOnTarget,
+  dplyr::tibble(Date, Goals, Team, Opponent, Home, Shots, ShotsOnTarget,
                 Fouls, Corners, YellowCard, RedCard)
 
 }

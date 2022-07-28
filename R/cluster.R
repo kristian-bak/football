@@ -30,7 +30,7 @@ join_cluster <- function(data, var_names, k) {
 
   data_cluster <- dplyr::tibble(
     Team = names(obj_kmeans$cluster),
-    Cluster = obj_kmeans$cluster %>% as.character()
+    Cluster = obj_kmeans$cluster %>% as.factor()
   )
 
   data_cluster_opponent <- data_cluster %>%
