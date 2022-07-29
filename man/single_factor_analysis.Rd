@@ -4,12 +4,14 @@
 \alias{single_factor_analysis}
 \title{Single factor analysis}
 \usage{
-single_factor_analysis(data, predictors, verbose = TRUE)
+single_factor_analysis(data, predictors, target = "Goals", verbose = TRUE)
 }
 \arguments{
 \item{data}{tibble with modeling data (see get_modeling_data_*)}
 
 \item{predictors}{character vector with predictor names}
+
+\item{target}{character string with target/response variable (default is "Goals")}
 
 \item{verbose}{logical indicating if loop counter should be on (default is TRUE)}
 }
