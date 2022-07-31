@@ -32,8 +32,11 @@ get_modeling_data_simple <- function(data) {
   Corners <- alternate_vectors(a = data$HC, b = data$AC)
   YellowCard <- alternate_vectors(a = data$HY, b = data$AY)
   RedCard <- alternate_vectors(a = data$HR, b = data$AR)
+  B365H <- rep(data$B365H, each = 2)
+  B365A <- rep(data$B365A, each = 2)
+  B365D <- rep(data$B365D, each = 2)
 
   dplyr::tibble(Date, Goals, Team, Opponent, Home, Shots, ShotsOnTarget,
-                Fouls, Corners, YellowCard, RedCard)
+                Fouls, Corners, YellowCard, RedCard, B365H, B365A, B365D)
 
 }

@@ -37,7 +37,7 @@ load_one_season <- function(league = "Premier League", season) {
                   yy = substring(Date, 7, 10),
                   Date = paste(yy, mm, dd, sep = "-") %>% as.Date()) %>%
     dplyr::select(Season, Date, HomeTeam, AwayTeam, FTHG, FTAG, FTR, FTHG, FTAG, HTR, HTHG, HTAG,
-                  HS, AS, HST, AST, HF, AF, HC, AC, HY, AY, HR, AR) #%>%
+                  HS, AS, HST, AST, HF, AF, HC, AC, HY, AY, HR, AR, B365H, B365D, B365A) #%>%
   #dplyr::filter((HomeTeam == team1 & AwayTeam == team2) | (HomeTeam == team2 & AwayTeam == team1))
 
 }

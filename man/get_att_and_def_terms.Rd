@@ -4,10 +4,12 @@
 \alias{get_att_and_def_terms}
 \title{Get formula}
 \usage{
-get_att_and_def_terms(predictors)
+get_att_and_def_terms(predictors, home)
 }
 \arguments{
 \item{predictors}{character vector with predictor names}
+
+\item{home}{logical indicating if Home variable should be included in attack and defence terms (if so, both attack and defence flags for Arsenal are dropped)}
 }
 \value{
 formula Goals ~ -1 + pred_1 + pred_2 + ... + pred_n
