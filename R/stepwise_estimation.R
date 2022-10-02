@@ -3,7 +3,10 @@
 #' @param alpha signifiance level (default is 0.05)
 #' @param max_iteration maximum number of steps
 #' @param intercept intercept, logical indicating an intercept will be estimated
-#'
+#' @examples
+#' if (FALSE) {
+#' models <- stepwise_estimation(data = data_flags)
+#' }
 stepwise_estimation <- function(data, alpha = 0.05, max_iteration = 40, intercept = TRUE) {
 
   go_step <- TRUE

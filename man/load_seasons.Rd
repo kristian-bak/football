@@ -4,7 +4,7 @@
 \alias{load_seasons}
 \title{Load seasons}
 \usage{
-load_seasons(league = "Premier League", from, to, verbose = TRUE)
+load_seasons(league = "Premier League", from, to, verbose = FALSE)
 }
 \arguments{
 \item{league}{character string with league name (Premier League or La Liga)}

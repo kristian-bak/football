@@ -4,12 +4,14 @@
 \alias{vectorized_prob}
 \title{Vectorized probabilities}
 \usage{
-vectorized_prob(data, obj)
+vectorized_prob(data, obj, verbose)
 }
 \arguments{
 \item{data}{tibble with season data (see load_seasons)}
 
 \item{obj}{glm obj}
+
+\item{verbose}{logical indicating if loop counter should be on (TRUE) or off (FALSE)}
 }
 \value{
 tibble with input data and 6 additional columns (probabilities and ratios for home, draw and away win)

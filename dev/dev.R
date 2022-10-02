@@ -25,6 +25,7 @@ usethis::use_test("get_futbin_url")
 usethis::use_test("get_league_table")
 usethis::use_test("get_minutes_goals_scored")
 usethis::use_test("season_seq")
+usethis::use_test("add_time_depending_cols")
 
 ## Code coverage
 devtools::test_coverage()

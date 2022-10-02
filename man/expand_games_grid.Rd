@@ -11,7 +11,7 @@ expand_games_grid(team_names, league, season)
 
 \item{league}{character string with league name (for instance "premier-league")}
 
-\item{season}{character string with season(for istance "2021-2022")}
+\item{season}{character string with season(for instance "2021-2022")}
 }
 \value{
 tibble with grid consisting of all games possible from `team_names`

@@ -1,0 +1,47 @@
+---
+title: "Report"
+format: html
+editor: visual
+---
+
+```{r, message = FALSE}
+devtools::load_all()
+```
+
+Loading data, estimating the model and placing bets
+```{r, label = "Load estimate and place bets"}
+out <- load_estimate_and_place_bets(league = "Premier League", from = 18, to = 22)
+
+data_train_bet <- out %>% 
+  purrr::pluck("data_train_bet")
+
+data_test_bet <- out %>% 
+  purrr::pluck("data_test_bet")
+
+model <- out %>% 
+  purrr::pluck("model")
+```
+
+Summaring the earning for each strategy
+```{r}
+data_train_bet %>% 
+  plot_earnings_by_day_and_model(title = "Earnings using training data (Season 18-22)")
+```
+
+```{r}
+data_test_bet %>% 
+  plot_earnings_by_day_and_model(title = "Earnings using test data (Season 21-22)")
+```
+
+Summarising the model
+```{r}
+model %>% 
+  summary()
+```
+
+```{r}
+test_data %>% 
+  dplyr::group_by(Team) %>% 
+  evaluate_performance(obj = model, test_data = ., target = "Goals")
+```
+

@@ -2,9 +2,9 @@
 #' @param data tibble with modeling data (see get_modeling_data_*)
 #' @param predictors character vector with predictor names
 #' @param target character string with target/response variable (default is "Goals")
-#' @param verbose logical indicating if loop counter should be on (default is TRUE)
+#' @param verbose logical indicating if loop counter should be on (default is FALSE)
 #'
-single_factor_analysis <- function(data, predictors, target = "Goals", verbose = TRUE) {
+single_factor_analysis <- function(data, predictors, target = "Goals", verbose = FALSE) {
 
   p <- length(predictors)
 

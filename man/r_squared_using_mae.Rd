@@ -4,10 +4,12 @@
 \alias{r_squared_using_mae}
 \title{R squared calculated using mean absolute error (MAE) rather than likelihood function}
 \usage{
-r_squared_using_mae(obj, target = "Goals")
+r_squared_using_mae(obj, data, target = "Goals")
 }
 \arguments{
 \item{obj}{glm object}
+
+\item{data}{optional, data to evaluate r squared on (default is training data taken from the glm object)}
 
 \item{target}{character string specifying the target/response variable}
 }

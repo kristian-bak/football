@@ -48,8 +48,9 @@ get_prob <- function(lambda_home_team, lambda_away_team) {
 #' Vectorized probabilities
 #' @param data tibble with season data (see load_seasons)
 #' @param obj glm obj
+#' @param verbose logical indicating if loop counter should be on (TRUE) or off (FALSE)
 #' @return tibble with input data and 6 additional columns (probabilities and ratios for home, draw and away win)
-vectorized_prob <- function(data, obj) {
+vectorized_prob <- function(data, obj, verbose) {
 
   n <- nrow(data)
 
@@ -62,7 +63,9 @@ vectorized_prob <- function(data, obj) {
       lambda_away_team = data$lambda_home_team[i]
     )
 
-    kb.utils::loop_counter(i = i, n = n)
+    if (verbose) {
+      kb.utils::loop_counter(i = i, n = n)
+    }
 
   }
 
@@ -88,17 +91,30 @@ add_prob_odds_ratio <- function(data) {
 
 }
 
-#' Bet model
+#' Get model bets
 #' @param data tibble with season data
+#' @param obj glm object
+#' @param verbose logical indicating if loop counter should be on (TRUE) or off (FALSE)
 #' @return tibble with season data and additional column related to probability, odds, ratio and bet
-bet_model <- function(data) {
+get_model_bets <- function(data, obj, verbose = FALSE) {
 
   data_lambda <- get_lambda(data = data, obj = obj)
 
-  data_bet <- vectorized_prob(data = data_lambda, obj = obj) %>%
+  data_bet <- vectorized_prob(data = data_lambda, obj = obj, verbose = verbose) %>%
     add_prob_odds_ratio()
 
   data_bet %>%
+    bet_model()
+
+}
+
+#' Bet model
+#' @param data tibble with bets
+#' @return tibble
+#'
+bet_model <- function(data) {
+
+  data %>%
     dplyr::mutate(
       bet = dplyr::case_when(
         ratio_home > 1 & ratio_home > ratio_away & ratio_home > ratio_draw ~ "H",
@@ -107,7 +123,11 @@ bet_model <- function(data) {
         TRUE ~ "No bet"),
       odds = dplyr::case_when(bet == "H" ~ B365H,
                               bet == "A" ~ B365A,
-                              bet == "D" ~ B365D)
+                              bet == "D" ~ B365D),
+      correct = ifelse(bet == FTR, 1,
+                       ifelse(bet != FTR & bet != "No bet", 0, NA)),
+      stake = ifelse(bet != "No bet", 10, 0),
+      earning = ifelse(!is.na(correct), odds * correct * stake - stake, NA)
     )
 
 }

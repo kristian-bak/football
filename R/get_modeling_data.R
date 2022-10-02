@@ -21,10 +21,12 @@ get_modeling_data <- function(data) {
 #'
 get_modeling_data_simple <- function(data) {
 
+  Season <- rep(data$Season, each = 2)
   Date <- rep(data$Date, each = 2)
   Goals <- alternate_vectors(a = data$FTHG, b = data$FTAG)
   Team <- alternate_vectors(a = data$HomeTeam, b = data$AwayTeam)
   Opponent <- alternate_vectors(a = data$AwayTeam, b = data$HomeTeam)
+  FTR <- rep(data$FTR, each = 2)
   Home <- rep(c("1", "0"), nrow(data)) %>% as.factor()
   Shots <- alternate_vectors(a = data$HS, b = data$AS)
   ShotsOnTarget <- alternate_vectors(a = data$HST, b = data$AST)
@@ -36,7 +38,7 @@ get_modeling_data_simple <- function(data) {
   B365A <- rep(data$B365A, each = 2)
   B365D <- rep(data$B365D, each = 2)
 
-  dplyr::tibble(Date, Goals, Team, Opponent, Home, Shots, ShotsOnTarget,
+  dplyr::tibble(Season, Date, Goals, Team, Opponent, FTR, Home, Shots, ShotsOnTarget,
                 Fouls, Corners, YellowCard, RedCard, B365H, B365A, B365D)
 
 }

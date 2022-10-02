@@ -18,3 +18,8 @@ stepwise_estimation(data, alpha = 0.05, max_iteration = 40, intercept = TRUE)
 \description{
 Stepwise esimation
 }
+\examples{
+if (FALSE) {
+models <- stepwise_estimation(data = data_flags)
+}
+}

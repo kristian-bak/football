@@ -29,16 +29,25 @@ load_one_season <- function(league = "Premier League", season) {
 
   url <- get_url(league = league, season = season)
 
-  read.csv(url, header = TRUE) %>%
-    dplyr::as_tibble() %>%
+  data <- read.csv(url, header = TRUE) %>%
+    dplyr::as_tibble()
+
+  two_char_year <- data %>%
+    dplyr::pull(Date) %>%
+    nchar() %>%
+    max() %>%
+    magrittr::equals(8)
+
+  data %>%
     dplyr::mutate(Season = season,
-                  dd = substring(Date, 1, 2),
-                  mm = substring(Date, 4, 5),
-                  yy = substring(Date, 7, 10),
-                  Date = paste(yy, mm, dd, sep = "-") %>% as.Date()) %>%
+                            dd = substring(Date, 1, 2),
+                            mm = substring(Date, 4, 5),
+                            yy = if (two_char_year) paste0("20", substring(Date, 7, 8)) else substring(Date, 7, 10),
+                            Date = paste(yy, mm, dd, sep = "-") %>% as.Date()) %>%
     dplyr::select(Season, Date, HomeTeam, AwayTeam, FTHG, FTAG, FTR, FTHG, FTAG, HTR, HTHG, HTAG,
-                  HS, AS, HST, AST, HF, AF, HC, AC, HY, AY, HR, AR, B365H, B365D, B365A) #%>%
-  #dplyr::filter((HomeTeam == team1 & AwayTeam == team2) | (HomeTeam == team2 & AwayTeam == team1))
+                  HS, AS, HST, AST, HF, AF, HC, AC, HY, AY, HR, AR, B365H, B365D, B365A)
+
+
 
 }
 
@@ -65,7 +74,7 @@ season_seq <- function(from, to) {
 #' @param verbose logical indicating if looper counter should be on (TRUE) or off (FALSE)
 #' @return tibble with football results
 #'
-load_seasons <- function(league = "Premier League", from, to, verbose = TRUE) {
+load_seasons <- function(league = "Premier League", from, to, verbose = FALSE) {
 
   seasons <- season_seq(from = from, to = to)
 
