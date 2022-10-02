@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+inst/etl/report_files/
+inst/etl/report.html

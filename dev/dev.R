@@ -19,6 +19,9 @@ usethis::use_package("glue")
 ## Install github dependency
 remotes::install_github(repo = "kristian-bak/kb.utils")
 
+## Run tests
+devtools::test(filter = "add_time_depending_cols")
+
 ## Add test
 usethis::use_test("load_seasons")
 usethis::use_test("get_futbin_url")
